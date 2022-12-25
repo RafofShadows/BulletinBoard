@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView
 
 from .filters import BulletinFilterCategory
+from .forms import BulletinForm
 from .models import Response, Bulletin
 
 
@@ -24,5 +25,23 @@ class BulletinListAll(ListView):
         context = super().get_context_data(**kwargs)
         context['filterset'] = self.filterset
         return context
+
+
+class BulletinDetail(DetailView):
+    model = Bulletin
+    template_name = 'bulletin.html'
+    context_object_name = 'bulletin'
+
+
+class BulletinCreate(CreateView):
+    form_class = BulletinForm
+    model = Bulletin
+    template_name = 'bulletin_edit.html'
+
+    def form_valid(self, form):
+        bulletin = form.save(commit=False)
+        super().form_valid(form)
+        return redirect('board/')
+
 
 

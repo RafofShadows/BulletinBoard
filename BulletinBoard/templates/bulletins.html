@@ -15,8 +15,11 @@ Bulletins
         {% for item in bulletins %}
         <tr style="font-size:20px" align="left">
             <td><a href="{{post.get_absolute_url}}"><b>{{item.header}}</b></a></td>
-            <td>{{post.timestamp|date:'d M Y'}}</td>
-            <td>{{post.text|truncatechars:20}}</td>
+            <td>{{item.timestamp|date:'d M Y'}}</td>
+
+        </tr>
+        <tr>
+            <td>{{item.body}}</td>
         </tr>
         {% endfor %}
     </table>

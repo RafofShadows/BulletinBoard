@@ -1,0 +1,17 @@
+{% extends 'default.html' %}
+
+{% block title %}
+Bulletin
+{% endblock title %}
+
+{% block content %}
+<h1>{{bulletin.header}}</h1>
+<h3>От {{bulletin.timestamp|date:'d.M.Y'}}</h3>
+<p align="left">{{bulletin.body}}</p>
+<table>
+    <tr>
+        <td><form action="{{request.path}}/update/"><input type="submit" value="Редактировать"></form> </td>
+        <td><form action="{{request.path}}/delete/"><input type="submit" value="Удалить"></form> </td>
+    </tr>
+</table>
+{% endblock content %}
