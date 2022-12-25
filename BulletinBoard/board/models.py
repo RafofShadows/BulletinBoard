@@ -31,10 +31,12 @@ class Bulletin(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     header = models.CharField(max_length=100, default='')
     body = HTMLField()
+    timestamp = models.DateTimeField(auto_now_add=True)
     category = models.CharField(max_length=2, choices=CATEGORY, default='DD')
 
 
 class Response(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(default='')
+    timestamp = models.DateTimeField(auto_now_add=True)
     bulletin = models.ForeignKey(Bulletin, on_delete=models.CASCADE)
